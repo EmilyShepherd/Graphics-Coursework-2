@@ -1,0 +1,10 @@
+Model and image Loading algorithm - http://www.opengl-tutorial.org/beginners-tutorials/tutorial-7-model-loading/
+  Model::Model() and loadBMP() are based on this
+
+Sign images are taken from Valve's Portal 2 and are used under Fair Use
+(for educational purposes)
+
+Textures come from Google Sketchup's standard library
+
+All model's (.obj files) were created by me using Google Sketchup and
+exported to .obj via Blender.
