@@ -34,7 +34,20 @@ void loadShader(char *file, GLuint type, GLuint program)
     GLuint shader = glCreateShader(type);
     glShaderSource(shader, 1, (const GLchar**)&buf, 0);
     glCompileShader(shader);
-    glAttachShader(program, shader);
+
+    int status;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+
+    if (status)
+    {
+        glAttachShader(program, shader);
+    }
+    else
+    {
+        glGetShaderInfoLog(shader, length, NULL, buf);
+        printf("[ERROR] Shader Compilation Failure For: %s\n", file);
+        printf("%s", buf);
+    }
 
     free(buf);
 }
