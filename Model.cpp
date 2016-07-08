@@ -41,12 +41,17 @@ void copyString(char* from, char* to)
 
 Model::Model(char *path)
 {
+    path = append("obj/", path);
     FILE * file = fopen(path, "r");
+
     if (file == NULL)
     {
         fprintf(stderr, "[ERROR] Impossible to open object file: '%s'!\n", path);
+        free(path);
         return;
     }
+
+    free(path);
 
     // For some reason everything crashes if this isn't a vec3.
     std::vector< glm::vec3 > temp_normals;

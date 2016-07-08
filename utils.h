@@ -6,6 +6,7 @@
 
 void loadShader(char *file, GLuint type, GLuint program);
 unsigned char* loadBMP(const char * imagepath, int* width, int* height);
+char* append(const char* dir, const char* path);
 
 /**
  * Cameras and static objects are entities

@@ -15,12 +15,17 @@ Material::Material(char* path)
     textures = (unsigned char**)malloc(sizeof(unsigned char*) * 128);
     int t = 0;
 
+    path = append("obj/", path);
     FILE * file = fopen(path, "r");
+
     if (file == NULL)
     {
         fprintf(stderr, "[ERROR] Impossible to open material file: %s !\n", path);
+        free(path);
         return;
     }
+
+    free(path);
 
     MaterialType mt;
     mt.inited      = true;
@@ -65,9 +70,10 @@ Material::Material(char* path)
             }
             else
             {
+                char* newPath = append("images/", path);
                 int width, height;
-
-                unsigned char* img = loadBMP(path, &width, &height);
+                unsigned char* img = loadBMP(newPath, &width, &height);
+                free(newPath);
 
                 if (img != 0)
                 {

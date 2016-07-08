@@ -100,3 +100,15 @@ unsigned char* loadBMP(const char * imagepath, int* width, int* height)
 
 	return data;
 }
+
+char* append(const char* dir, const char* path)
+{
+    char* joined = (char*)malloc
+    (
+        sizeof(char*) * (strlen(dir) + strlen(path))
+    );
+    strcpy(joined, dir);
+    strcat(joined, path);
+
+    return joined;
+}
