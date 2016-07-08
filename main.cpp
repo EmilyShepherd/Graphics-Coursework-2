@@ -41,6 +41,11 @@ void SetupShaders(void)
     glUseProgram(shaderprogram);
 }
 
+void resize_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
 /**
  * Handles key presses
  */
@@ -190,6 +195,7 @@ int main(void)
     /* * * GENERAL INIT * * */
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
+    glfwSetWindowSizeCallback(window, resize_callback);
     glewExperimental = GL_TRUE;
     glewInit();
     glEnable(GL_DEPTH_TEST);
