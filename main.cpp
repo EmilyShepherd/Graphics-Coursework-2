@@ -10,20 +10,37 @@
 #include <stdlib.h>
 #include "utils.h"
 #include <vector>
-#include "time.h"
 #include "Object.h"
+#include <unistd.h>
+
+#define MAX_FPS 30.
 
 GLuint shaderprogram;
 
 Camera camera;
-
-int fps;
 
 int intour = 0;
 int active = 1;
 
 Object sunObj;
 double worldTime = 00.0;
+
+#define MAXSAMPLES 100
+int tickindex  = 0;
+double ticksum = 0;
+double ticklist[MAXSAMPLES];
+
+double CalcAverageTime(double newtick)
+{
+    ticksum            -=ticklist[tickindex];
+    ticksum            +=newtick;
+    ticklist[tickindex] =newtick;
+
+    if(++tickindex==MAXSAMPLES)
+        tickindex=0;
+
+    return ticksum/MAXSAMPLES;
+}
 
 /**
  * Loads the shaders
@@ -214,7 +231,7 @@ int main(void)
     Model container  = Model((char *)"container.obj");
 
     // Start the animation clock
-    clock_t lastUpdate = clock();
+    double lastUpdate = glfwGetTime();
 
     // Place objects about the place
     Object rocksObj = Object(&rocks, 5, glm::vec3(0.0, 0.0, -50.0));
@@ -255,8 +272,8 @@ int main(void)
 
     while(!glfwWindowShouldClose(window))
     {
-        double time = (clock() - lastUpdate) / (double)CLOCKS_PER_SEC;
-        lastUpdate = clock();
+        double frameStart = glfwGetTime();
+        double time = (frameStart - lastUpdate);
 
         if (intour)
         {
@@ -332,6 +349,23 @@ int main(void)
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        double took = glfwGetTime() - lastUpdate;
+        double wait = 1./MAX_FPS - took;
+        double totalFrame;
+        lastUpdate = frameStart;
+
+        if (wait > 0)
+        {
+            usleep(1000000 * wait);
+            totalFrame = 1./MAX_FPS;
+        }
+        else
+        {
+            totalFrame = took;
+        }
+
+        printf("FPS: %f\r", 1 / CalcAverageTime(totalFrame));
     }
 
     glfwDestroyWindow(window);
