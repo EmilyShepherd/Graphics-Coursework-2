@@ -112,3 +112,19 @@ char* append(const char* dir, const char* path)
 
     return joined;
 }
+
+int _hashString(char* str)
+{
+    unsigned int value = 0;
+
+    while (1)
+    {
+        value += (unsigned int)*str;
+        str++;
+
+        if (*str == 0)
+            break;
+    }
+
+    return value;
+}

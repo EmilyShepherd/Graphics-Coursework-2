@@ -1,3 +1,6 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <vector>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -7,6 +10,7 @@
 void loadShader(char *file, GLuint type, GLuint program);
 unsigned char* loadBMP(const char * imagepath, int* width, int* height);
 char* append(const char* dir, const char* path);
+int _hashString(char* str);
 
 /**
  * Cameras and static objects are entities
@@ -33,3 +37,5 @@ class Camera
         int tourPause(double seconds);
         double base = 0.0;
 };
+
+#endif

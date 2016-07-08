@@ -1,9 +1,9 @@
 
 
 PROJECT       = graphics
-SOURCE        = $(wildcard *.cpp)
-OBJECTS       = $(SOURCE:.cpp=.o)
-DEPS          = $(SOURCE:.cpp=.d)
+SOURCE        = $(notdir $(wildcard src/*.cpp))
+OBJECTS       = $(addprefix bin/,$(SOURCE:.cpp=.o))
+DEPS          = $(addprefix bin/,$(SOURCE:.cpp=.d))
 
 
 .PHONY: all clean
@@ -13,8 +13,8 @@ all: $(PROJECT).out
 clean:
 	rm -f $(PROJECT).out $(OBJECTS) $(DEPS)
 
-.cpp.o:
-	gcc -c -MD -std=gnu++11 -o $@ $<
+bin/%.o: src/%.cpp
+	g++ -c -MD -std=gnu++11 -I./include -o $@ $<
 
 $(PROJECT).out: $(OBJECTS)
 	gcc -o $@ $^ -lGL -lglfw -lGLEW -lm -lstdc++

@@ -4,7 +4,7 @@
 #include <vector>
 #include <stdio.h>
 #include <stdlib.h>
-#include "TerribleString.h"
+#include "utils.h"
 
 template <class type>
 class TerribleArray
