@@ -93,7 +93,7 @@ glm::mat4 Object::calculateM(double seconds)
 
     if (angle)
     {
-        M = glm::rotate(M, glm::radians(angle), rotAxis);
+        M = glm::rotate(M, angle, rotAxis);
     }
 
     return M * base;

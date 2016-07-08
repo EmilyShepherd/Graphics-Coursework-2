@@ -7,7 +7,7 @@ extern GLuint shaderprogram;
 extern Camera camera;
 extern int intour;
 
-glm::mat4 P = glm::perspective(glm::radians(100.0f), 1.0f, 0.01f, 1000.0f);
+glm::mat4 P = glm::perspective(1.74533f, 1.0f, 0.01f, 1000.0f);
 
 /**
  * Sets up default values on the entity
@@ -58,7 +58,7 @@ void Camera::rotate(float angle)
         * glm::rotate
           (
               glm::mat4(1.f),
-              glm::radians(angle),
+              angle,
               glm::vec3(0.f, 1.f, 0.f)
           )
     );
@@ -110,40 +110,40 @@ void Camera::tour(double seconds)
     base      = 0.0;
 
     tourPause(3.) &&
-    tourFrame(5., 90.) &&
-    tourFrame(5., -90., glm::vec3(-9., 6., -40.)) &&
+    tourFrame(5., M_PI_4) &&
+    tourFrame(5., -1. * M_PI_4, glm::vec3(-9., 6., -40.)) &&
     tourPause(2.) &&
-    tourFrame(10., 120., glm::vec3(0., 0., 20.)) &&
+    tourFrame(10., 2.0944, glm::vec3(0., 0., 20.)) &&
     tourPause(.5) &&
-    tourFrame(7, 10., glm::vec3(7., -3., -45.)) &&
-    tourFrame(3., -90., glm::vec3(-2, 0, -10)) &&
+    tourFrame(7, 0.174533, glm::vec3(7., -3., -45.)) &&
+    tourFrame(3., -1. * M_PI_4, glm::vec3(-2, 0, -10)) &&
     tourPause(3.) &&
-    tourFrame(2., 140., glm::vec3(6, 1., -5)) &&
+    tourFrame(2., 2.44346, glm::vec3(6, 1., -5)) &&
     tourFrame(2., glm::vec3(10., 0., -10.)) &&
-    tourFrame(2., -60., glm::vec3(2., 1., -10.)) &&
+    tourFrame(2., -1.0472, glm::vec3(2., 1., -10.)) &&
     tourPause(2.) &&
-    tourFrame(2., 60., glm::vec3(20., 10., -20.)) &&
+    tourFrame(2., 1.0472, glm::vec3(20., 10., -20.)) &&
     tourFrame(3., glm::vec3(40., 0., -20.)) &&
-    tourFrame(3., 10., glm::vec3(60., -60., 0.)) &&
-    tourFrame(2., -70.) &&
-    tourFrame(2., 10., glm::vec3(30., 35., -80.)) &&
-    tourFrame(4.5, 210., glm::vec3(10., 30., 0.)) &&
-    tourFrame(4., 80., glm::vec3(5., 20., 80.)) &&
-    tourFrame(2., -20., glm::vec3(-10., 10., 10.)) &&
+    tourFrame(3., 0.174533, glm::vec3(60., -60., 0.)) &&
+    tourFrame(2., -1.22173) &&
+    tourFrame(2., 0.174533, glm::vec3(30., 35., -80.)) &&
+    tourFrame(4.5, 0.174533, glm::vec3(10., 30., 0.)) &&
+    tourFrame(4., 1.39626, glm::vec3(5., 20., 80.)) &&
+    tourFrame(2., -0.349066, glm::vec3(-10., 10., 10.)) &&
     tourFrame(4., glm::vec3(-130., 10., 10.)) &&
-    tourFrame(9., 100., glm::vec3(-130., 0., 0.)) &&
-    tourFrame(8., 50., glm::vec3(-50., -40., -20.)) &&
-    tourFrame(4., 35., glm::vec3(50., -10., 30.)) &&
-    tourFrame(3., -90, glm::vec3(-5., 45., -60.)) &&
-    tourFrame(1., -30, glm::vec3(0., 0., -10.)) &&
+    tourFrame(9., 1.74533, glm::vec3(-130., 0., 0.)) &&
+    tourFrame(8., 0.872665, glm::vec3(-50., -40., -20.)) &&
+    tourFrame(4., 0.610865, glm::vec3(50., -10., 30.)) &&
+    tourFrame(3., -1. * M_PI_4, glm::vec3(-5., 45., -60.)) &&
+    tourFrame(1., -0.523599, glm::vec3(0., 0., -10.)) &&
     tourFrame(2.5, glm::vec3(0., -40., -50.)) &&
     tourPause(1.) &&
-    tourFrame(4., -50., glm::vec3(-55., 50., -25.)) &&
-    tourFrame(4., 80., glm::vec3(-30., 50., -20.)) &&
-    tourFrame(4., 120., glm::vec3(0., 10., -50.)) &&
-    tourFrame(4., 80., glm::vec3(35., -5., -10.)) &&
+    tourFrame(4., -0.872665, glm::vec3(-55., 50., -25.)) &&
+    tourFrame(4., 1.39626, glm::vec3(-30., 50., -20.)) &&
+    tourFrame(4., 2.0944, glm::vec3(0., 10., -50.)) &&
+    tourFrame(4., 1.39626, glm::vec3(35., -5., -10.)) &&
     tourPause(2.) &&
-    tourFrame(10., -80) &&
+    tourFrame(10., -1.39626) &&
     (intour = 0);
 }
 

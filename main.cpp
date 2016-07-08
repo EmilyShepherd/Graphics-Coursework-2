@@ -83,7 +83,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                     * glm::rotate
                       (
                           glm::mat4(1.f),
-                          -1.f,
+                          -0.017453f,
                           glm::vec3(0.f, 1.f, 0.f)
                       )
                 );
@@ -96,7 +96,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                     * glm::rotate
                       (
                           glm::mat4(1.f),
-                          1.f,
+                          0.017453f,
                           glm::vec3(0.f, 1.f, 0.f)
                       )
                 );
@@ -248,14 +248,14 @@ int main(void)
     sunObj.time     = 40.;
     sunObj.start    = glm::rotate(glm::mat4(1.), 45.f, glm::vec3(0., 1., 0.));
     sunObj.rotAxis  = glm::vec3(-1.0, 0.0, 1.0);
-    sunObj.rotAngle = 360.;
+    sunObj.rotAngle = 2. * M_PI;
     sunObj.after    = glm::translate(glm::mat4(1.), glm::vec3(60.,0.,-200.));
     sunObj.init();
 
     Object crane1 = Object(&crane, 5.);
     crane1.after = glm::translate(glm::mat4(1.), glm::vec3(35.669243, 81.000000, -147.689926));
     crane1.rotAxis = glm::vec3(0.0, 1.0, 0.0);
-    crane1.rotAngle = -45.;
+    crane1.rotAngle = -0.5 * M_PI_4;
     crane1.doReverse = 1;
     crane1.pause = 1.;
     crane1.init();
