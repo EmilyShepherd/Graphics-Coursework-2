@@ -61,6 +61,7 @@ void SetupShaders(void)
 void resize_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
+    camera.setAspect((float)width / (float)height);
 }
 
 /**

@@ -26,6 +26,7 @@ class Camera
         glm::vec3 lookAt;
         glm::mat4 VP();
         glm::mat4 V();
+        void setAspect(float aspect);
         void moveForward();
         void tour(double seconds);
         double elapsedTime = 0.0;

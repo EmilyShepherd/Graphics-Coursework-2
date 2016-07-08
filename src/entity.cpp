@@ -36,6 +36,11 @@ void Camera::moveForward( void )
     lookAt    = position + direction;
 };
 
+void Camera::setAspect(float aspect)
+{
+    P = glm::perspective(1.74533f, aspect, 0.01f, 1000.0f);
+}
+
 /**
  * Returns the View with the Perspective
  */
