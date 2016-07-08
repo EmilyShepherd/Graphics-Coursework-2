@@ -30,11 +30,10 @@ void main(void)
     vec3 n = normalize( Normal_cameraspace );
     vec3 E = normalize(EyeDirection_cameraspace);
 
-    //if (dot(E,n) < 0)
-    //{
-        //FragColor = vec4(1.0);
-        //discard;
-    //}
+    if (dot(E,n) < 0.)
+    {
+        discard;
+    }
 
     vec4 C;
 
