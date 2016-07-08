@@ -1,4 +1,4 @@
-#version 150
+#version 300 es
 
 #define LIGHTS 6
 
@@ -7,7 +7,7 @@ precision highp float;
 out vec4 FragColor;
 
 uniform vec3 color;
-uniform sampler2D texture;
+uniform sampler2D _texture;
 uniform int doTexture;
 uniform vec3 LightPosition_worldspace[LIGHTS];
 uniform vec3 ambiantDirection;
@@ -30,17 +30,17 @@ void main(void)
     vec3 n = normalize( Normal_cameraspace );
     vec3 E = normalize(EyeDirection_cameraspace);
 
-    if (dot(E,n) < 0)
-    {
+    //if (dot(E,n) < 0)
+    //{
         //FragColor = vec4(1.0);
         //discard;
-    }
+    //}
 
     vec4 C;
 
     if (doTexture == 1)
     {
-        C = texture(texture, UV);
+        C = texture(_texture, UV);
     }
     else
     {
@@ -76,7 +76,7 @@ void main(void)
 
     if (n.y >= -0.5)
     {
-        float cosThetaAmiant = clamp( dot( n,ambiantDirection ), 0,1 );
+        float cosThetaAmiant = clamp( dot( n,ambiantDirection ), 0., 1. );
 
         Co += MaterialDiffuseColor * vec3(1.0, 1., 1.) * cosThetaAmiant;
     }
@@ -102,7 +102,7 @@ void main(void)
                 //  - light is at the vertical of the triangle -> 1
                 //  - light is perpendicular to the triangle -> 0
                 //  - light is behind the triangle -> 0
-                float cosTheta = clamp( dot( n,ld ), 0,1 );
+                float cosTheta = clamp( dot( n,ld ), 0.,1. );
                 
                 // Direction in which the triangle reflects the light
                 vec3 R = reflect(-ld,n);
@@ -110,13 +110,13 @@ void main(void)
                 // clamped to 0
                 //  - Looking into the reflection -> 1
                 //  - Looking elsewhere -> < 1
-                float cosAlpha = clamp( dot( E,R ), 0,1 );
+                float cosAlpha = clamp( dot( E,R ), 0.,1. );
 
                 Co += 
                     // Diffuse : "color" of the object
                     MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +
                     // Specular : reflective highlight, like a mirror
-                    MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
+                    MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5.) / (distance*distance);
             }
         }
     }
