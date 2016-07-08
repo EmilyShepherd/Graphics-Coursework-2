@@ -7,7 +7,7 @@ extern GLuint shaderprogram;
 extern Camera camera;
 extern int intour;
 
-glm::mat4 P = glm::perspective(100.0f, 1.0f, 0.01f, 1000.0f);
+glm::mat4 P = glm::perspective(glm::radians(100.0f), 1.0f, 0.01f, 1000.0f);
 
 /**
  * Sets up default values on the entity
@@ -58,7 +58,7 @@ void Camera::rotate(float angle)
         * glm::rotate
           (
               glm::mat4(1.f),
-              angle,
+              glm::radians(angle),
               glm::vec3(0.f, 1.f, 0.f)
           )
     );
